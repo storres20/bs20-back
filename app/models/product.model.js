@@ -42,7 +42,7 @@ Product.findById = (id, result) => {
 };
 
 Product.findByCat = (cat, result) => {
-  sql.query(`SELECT * FROM product WHERE category = ${cat}`, (err, res) => {
+  sql.query(`SELECT * FROM product WHERE category = ${cat} ORDER BY price ASC`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -61,7 +61,7 @@ Product.findByCat = (cat, result) => {
 };
 
 Product.findBySearch = (text, result) => {
-  sql.query(`SELECT * FROM product WHERE name LIKE '%${text}%'`, (err, res) => {
+  sql.query(`SELECT * FROM product WHERE name LIKE '%${text}%' ORDER BY price ASC`, (err, res) => {
     if (err) {
       console.log("error: ", err);
       result(err, null);
@@ -80,7 +80,7 @@ Product.findBySearch = (text, result) => {
 };
 
 Product.getAll = (title, result) => {
-  let query = "SELECT * FROM product";
+  let query = "SELECT * FROM product ORDER BY price ASC";
 
   if (title) {
     query += ` WHERE title LIKE '%${title}%'`;
