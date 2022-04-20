@@ -37,11 +37,12 @@ Puedes acceder a la API a traves de: <a href="https://bs20-back.vercel.app/" tar
 ### Guía de usuario
 ---
 
-## Vista de Escritorio
-<h1 align="center">Vista de Escritorio</h1>
-<img src="./img/Readme/vistaescritorio.png" />
+## Peticiones a la API
+<h1 align="center">Peticiones a la API</h1>
 
-Al iniciar la plataforma web de 🛍 🛒 **Bsale Test - Frontend** 🛍 🛒, desde el lado del cliente se realizarán **02 peticiones** a la **API del backend** para solicitar los datos de los **"productos"** y los datos de las **"categorias"**
+Al iniciar la plataforma web de 🛍 🛒 **Bsale Test - Frontend** 🛍 🛒; desde el lado del cliente se realizarán **02 peticiones** a la **API del backend** para solicitar los datos de los **"productos"** y los datos de las **"categorias"**
+
+La API establece una conexion hacia la Base de Datos suministrada por la empresa
 
 `Nota:` Los **"productos"** estan alojados en la tabla "productos" de la base de datos suministrados por la empresa
 
@@ -49,14 +50,111 @@ Al iniciar la plataforma web de 🛍 🛒 **Bsale Test - Frontend** 🛍 🛒, d
 
 `Nota:` La ruta del **API del backend** es: <a href="https://bs20-back.vercel.app/" target="_blank">https://bs20-back.vercel.app/</a>
 
+Las **peticiones** son de tipo **GET**
 
-## Productos
+```javascript
+// routes/product.routes.js
+
+module.exports = app => {
+  const products = require("../controllers/product.controller.js");
+
+  var router = require("express").Router();
+
+  // Create a new Product
+  //router.post("/", products.create);
+
+  // Retrieve all Products
+  router.get("/", products.findAll);
+
+  //Retrieve a single Product with id
+  router.get("/:id", products.findOne);
+  
+  // Retrieve a single Product with category
+  router.get("/cat/:cat", products.findOneCat);
+  
+  // Retrieve a single Product with search bar
+  router.get("/search/:text", products.findSearch);
+
+  app.use('/api/products', router);
+};
+```
+
+
+## Peticiones de Productos
 <h1>GET lista de "productos"</h1>
 
-* **GET** /api/products retornara todos los **"productos"**
-* Por medio de **AXIOS** se envia la solicitud GET a la API por medio de la URL: https://bs20-back.vercel.app/api/products
-* En respuesta se obtiene todos los **"productos"**
-* De momento, un total de 57 productos
+* **GET** /api/products desde el cliente (Frontend)
+* Por medio de **AXIOS** se envia la solicitud GET, desde el cliente (Frontend), a la API por medio de la URL: https://bs20-back.vercel.app/api/products
+* La API recibe la **peticion** tipo **GET** y la procesa
+
+```javascript
+// routes/product.routes.js
+
+ ...
+  // Retrieve all Products
+  router.get("/", products.findAll);
+  ...
+
+  app.use('/api/products', router);
+};
+```
+
+* La URL de peticion desde el cliente es .../api/products
+* Esto enruta hacia **"findAll"** en controllers/product.controller.js
+* **"findAll"** direcciona a **"getAll"**
+
+```javascript
+// controllers/product.controller.js
+
+// Retrieve all Products from the database (with condition).
+exports.findAll = (req, res) => {
+  const title = req.query.title;
+
+  Product.getAll(title, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Error de conexion. Intente de nuevo"
+      });
+    else res.send(data);
+  });
+};
+```
+
+* La API realiza la **consulta** de **peticion** a la Base de Datos
+* Se ordena de modo que el campo "price" sea de forma ASCENDENTE
+* Este pedido se encuentra en models/product.model.js
+
+```javascript
+// models/product.model.js
+
+...
+Product.getAll = (title, result) => {
+  let query = "SELECT * FROM product ORDER BY price ASC";
+
+  if (title) {
+    query += ` WHERE title LIKE '%${title}%'`;
+  }
+
+  sql.query(query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("products: ", res);
+    result(null, res);
+  });
+};
+
+module.exports = Product;
+```
+
+* La API obtiene como **respuesta** todos los **"productos"**; si es que, la solicitud fue exitosa
+* Caso contrario, se obtendra el **"error 500"**; el cual, es error de conexion en el servidor
+* De momento, se obtiene un total de 57 productos
+* La API envia la **respuesta** al cliente (Frontend)
 
 ```json
 [
