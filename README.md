@@ -27,7 +27,7 @@ https://bs20-back.vercel.app/
 ### Descripción y contexto
 ---
 
-🛍 🛒 **Bsale Test - Backend** 🛍 🛒 es una **API** que atiende las peticiones de datos que provienen desde el lado del cliente (Frontend) 🛒🛒🛒
+💻📱 **Bsale Test - Backend** 💻📱 es una **API** que atiende las peticiones de datos que provienen desde el lado del cliente (Frontend) 💻💻💻
 
 La API realiza consultas a las tablas "product" y "category" de la Base de Datos y envia las respuestas al cliente, respecto a la busqueda de productos diversos a adquirir.
 
