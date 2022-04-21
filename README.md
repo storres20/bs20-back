@@ -378,10 +378,10 @@ Al dar click sobre una de las **"categorias"**, ya sea del SIDEBAR o del SELECT-
 
 * **GET** /api/products/cat/:cat
 * Por medio de **AXIOS** se envia la solicitud GET, desde el cliente (Frontend)
-* URL de peticion: https://bs20-back.vercel.app/api/products/cat/:cat
+* URL de peticion: `https://bs20-back.vercel.app/api/products/cat/:cat`
 * La API recibe la peticion GET y la procesa
 
-`Nota:` En la URL https://bs20-back.vercel.app/api/products/cat/:cat el valor de **":cat"** debe ser reemplazado por el **"id"** de la **"categoria"** seleccionada
+`Nota:` En la URL `https://bs20-back.vercel.app/api/products/cat/:cat` el valor de **":cat"** debe ser reemplazado por el **"id"** de la **"categoria"** seleccionada
 
 `Nota:` Por ejemplo, si selecciono **"pisco"**, su **"id"** es **"2"**. Entonces la URL será https://bs20-back.vercel.app/api/products/cat/2
 
@@ -398,7 +398,7 @@ Al dar click sobre una de las **"categorias"**, ya sea del SIDEBAR o del SELECT-
 };
 ```
 
-* La URL de peticion desde el cliente es: https://bs20-back.vercel.app/api/products/cat/:cat
+* La URL de peticion desde el cliente es: `https://bs20-back.vercel.app/api/products/cat/:cat`
 * Esto enruta hacia "findOneCat" en `controllers/product.controller.js`
 * "findOneCat" direcciona a "findByCat"
 
@@ -548,9 +548,9 @@ Al ingresar un **"nombre"** en el "buscador" o "search bar" del Navbar y dar cli
 
 * **GET** /api/products/search/:text
 * Por medio de **AXIOS** se envia la solicitud GET, desde el cliente (Frontend)
-* URL de peticion: https://bs20-back.vercel.app/api/products/search/:text
+* URL de peticion: `https://bs20-back.vercel.app/api/products/search/:text`
 
-`Nota:` En la URL https://bs20-back.vercel.app/api/products/search/:text el valor de **":text"** debe ser reemplazado por el **"nombre"** ingresado en el "buscador" o "search bar" del Navbar
+`Nota:` En la URL `https://bs20-back.vercel.app/api/products/search/:text` el valor de **":text"** debe ser reemplazado por el **"nombre"** ingresado en el "buscador" o "search bar" del Navbar
 
 `Nota:` Por ejemplo, si selecciono **"ener"**, entonces **":text"** es reemplazado por **"ener"**. Entonces la URL será https://bs20-back.vercel.app/api/products/search/ener
 
@@ -567,7 +567,7 @@ Al ingresar un **"nombre"** en el "buscador" o "search bar" del Navbar y dar cli
 };
 ```
 
-* La URL de peticion desde el cliente es: https://bs20-back.vercel.app/api/products/search/:text
+* La URL de peticion desde el cliente es: `https://bs20-back.vercel.app/api/products/search/:text`
 * Esto enruta hacia "findSearch" en `controllers/product.controller.js`
 * "findSearch" direcciona a "findBySearch"
 
@@ -672,9 +672,9 @@ Product.findBySearch = (text, result) => {
 
 * **GET** /api/products/search/:text
 * Por medio de **AXIOS** se envia la solicitud GET, desde el cliente (Frontend)
-* URL de peticion: https://bs20-back.vercel.app/api/products/search/:text
+* URL de peticion: `https://bs20-back.vercel.app/api/products/search/:text`
 
-`Nota:` En la URL https://bs20-back.vercel.app/api/products/search/:text el valor de **":text"** debe ser reemplazado por el **"nombre"** ingresado en el "buscador" o "search bar" del Navbar
+`Nota:` En la URL `https://bs20-back.vercel.app/api/products/search/:text` el valor de **":text"** debe ser reemplazado por el **"nombre"** ingresado en el "buscador" o "search bar" del Navbar
 
 `Nota:` Por ejemplo, si selecciono **"asdasd"**, entonces **":text"** es reemplazado por **"asdasd"**. Entonces la URL será https://bs20-back.vercel.app/api/products/search/asdasd
 
@@ -691,7 +691,7 @@ Product.findBySearch = (text, result) => {
 };
 ```
 
-* La URL de peticion desde el cliente es: https://bs20-back.vercel.app/api/products/search/:text
+* La URL de peticion desde el cliente es: `https://bs20-back.vercel.app/api/products/search/:text`
 * Esto enruta hacia "findSearch" en `controllers/product.controller.js`
 * "findSearch" direcciona a "findBySearch"
 
@@ -730,7 +730,7 @@ exports.findSearch = (req, res) => {
 * **GET** /api/products
 * En este caso, para los diferentes tipos de PETICIONES predefinidos en la presente API
 * Por medio de **AXIOS** se envia la solicitud GET, desde el cliente (Frontend)
-* URL de peticion: https://bs20-back.vercel.app/api/products/...
+* URL de peticion: `https://bs20-back.vercel.app/api/products/...`
 
 ```javascript
 // routes/product.routes.js
@@ -742,7 +742,7 @@ exports.findSearch = (req, res) => {
 };
 ```
 
-* La URL de peticion desde el cliente es: https://bs20-back.vercel.app/api/products/...
+* La URL de peticion desde el cliente es: `https://bs20-back.vercel.app/api/products/...`
 * Esto enruta hacia "findSearch" en `controllers/product.controller.js`
 
 ```javascript
