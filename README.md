@@ -2,6 +2,7 @@
 <h1 align="center">Bsale Test - Backend</h1>
 
 https://bs20-back.vercel.app/
+
 ```json
 {
 "message": "Welcome to bs20-back API application."
@@ -44,13 +45,29 @@ Al iniciar la plataforma web de 🛍 🛒 **Bsale Test - Frontend** 🛍 🛒; d
 
 La API establece una conexion hacia la Base de Datos suministrada por la empresa
 
-`Nota:` Los **"productos"** estan alojados en la tabla "productos" de la base de datos suministrados por la empresa
+`Nota:` Los **"productos"** estan alojados en la tabla "product" de la base de datos suministrados por la empresa
 
-`Nota:` Las **"categorias"** estan alojadas en la tabla "categorias" de la base de datos suministrados por la empresa
+| `🔭Tabla` | `⚡"product"` |
+| :------ | :------ |
+| id | Identificador unicod del producto (int) |
+| name | Nombre del producto (varchar) |
+| url_image | URL de la imagen asociada al producto (varchar) |
+| price | Precio de venta del producto (float) |
+| discount | Porcentaje de descuento del producto (int) |
+| category | Identificador de la categoria (int) |
+
+`Nota:` Las **"categorias"** estan alojadas en la tabla "category" de la base de datos suministrados por la empresa
+
+| `🔭Tabla` | `⚡"category"` |
+| :------ | :------ |
+| id | Identificador unicod del producto (int) |
+| name | Nombre del producto (varchar) |
 
 `Nota:` La ruta del **API del backend** es: <a href="https://bs20-back.vercel.app/" target="_blank">https://bs20-back.vercel.app/</a>
 
-Las **peticiones** son de tipo **GET**
+`Nota:` Las **peticiones** son de tipo **GET**
+
+<h1>GET - "productos"</h1>
 
 ```javascript
 // routes/product.routes.js
@@ -78,13 +95,55 @@ module.exports = app => {
   app.use('/api/products', router);
 };
 ```
+`Nota:` Esta peticion GET accede a la tabla "product" de la Base de Datos
+
+`Nota:` URL = https://bs20-back.vercel.app/
+
+* Si la ruta de peticion es: "URL/api/products", podrá visualizar todos los "productos"
+* Si la ruta de peticion es: "URL/api/products/2", podrá visualizar el producto con el campo "id" igual a "2"
+* Si la ruta de peticion es: "URL/api/products/cat/4" podrá visualizar los productos con el campo "category" igual a "4"
+* Si la ruta de peticion es: "URL/api/products/search/ener" podrá visualizar los productos con el campo "name" que contiene en su contenido la palabra "ener"
+
+
+<h1>GET - "categorias"</h1>
+
+```javascript
+// routes/category.routes.js
+
+module.exports = app => {
+  const categories = require("../controllers/category.controller.js");
+
+  var router = require("express").Router();
+
+  // Create a new Category
+  //router.post("/", categories.create);
+
+  // Retrieve all Categories
+  router.get("/", categories.findAll);
+
+  // Retrieve a single Category with id
+  router.get("/:id", categories.findOne);
+
+  app.use('/api/categories', router);
+};
+```
+
+`Nota:` Esta peticion GET accede a la tabla "category" de la Base de Datos
+
+`Nota:` URL = https://bs20-back.vercel.app/
+
+* Si la ruta de peticion es: "URL/api/categories", podrá visualizar todas las "categorias"
+* Si la ruta de peticion es: "URL/api/categories/2", podrá visualizar la categoria con el campo "id" igual a "2"
 
 
 ## Peticiones de Productos
 <h1>GET lista de "productos"</h1>
 
+`Nota:` Retorna todos los "productos"
+
 * **GET** /api/products desde el cliente (Frontend)
-* Por medio de **AXIOS** se envia la solicitud GET, desde el cliente (Frontend), a la API por medio de la URL: https://bs20-back.vercel.app/api/products
+* Por medio de **AXIOS** se envia la solicitud GET, desde el cliente (Frontend)
+* URL de peticion: https://bs20-back.vercel.app/api/products
 * La API recibe la **peticion** tipo **GET** y la procesa
 
 ```javascript
@@ -99,7 +158,7 @@ module.exports = app => {
 };
 ```
 
-* La URL de peticion desde el cliente es .../api/products
+* La URL de peticion desde el cliente es: https://bs20-back.vercel.app/api/products
 * Esto enruta hacia **"findAll"** en controllers/product.controller.js
 * **"findAll"** direcciona a **"getAll"**
 
@@ -195,10 +254,86 @@ module.exports = Product;
 ## Categorias
 <h1>GET lista de "categorias"</h1>
 
-* **GET** /api/categories retornara todas las **"categorias"**
-* Por medio de **AXIOS** se envia la solicitud GET a la API por medio de la URL: https://bs20-back.vercel.app/api/categories
-* En respuesta se obtiene todas las **"categorias"**
-* De momento, un total de 7 categorias
+`Nota:` Retorna todas las "categorias"
+
+* **GET** /api/categories desde el cliente (Frontend)
+* Por medio de **AXIOS** se envia la solicitud GET, desde el cliente (Frontend)
+* URL de peticion: https://bs20-back.vercel.app/api/categories
+* La API recibe la **peticion** tipo **GET** y la procesa
+
+
+```javascript
+// routes/category.routes.js
+
+ ...
+  // Retrieve all Categories
+  router.get("/", categories.findAll);
+ ...
+
+  app.use('/api/categories', router);
+};
+```
+
+* La URL de peticion desde el cliente es: https://bs20-back.vercel.app/api/categories
+* Esto enruta hacia **"findAll"** en controllers/category.controller.js
+* **"findAll"** direcciona a **"getAll"**
+
+```javascript
+// controllers/category.controller.js
+
+...
+// Retrieve all Categories from the database (with condition).
+exports.findAll = (req, res) => {
+  const title = req.query.title;
+
+  Category.getAll(title, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving Categories."
+      });
+    else res.send(data);
+  });
+};
+...
+```
+
+* La API realiza la **consulta** de **peticion** a la Base de Datos
+* Se ordena de modo que el campo "price" sea de forma ASCENDENTE
+* Este pedido se encuentra en models/category.model.js
+
+```javascript
+// models/category.model.js
+
+...
+Category.getAll = (title, result) => {
+  let query = "SELECT * FROM category";
+
+  if (title) {
+    query += ` WHERE title LIKE '%${title}%'`;
+  }
+
+  sql.query(query, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(null, err);
+      return;
+    }
+
+    console.log("categories: ", res);
+    result(null, res);
+  });
+};
+
+module.exports = Category;
+```
+
+
+* La API obtiene como **respuesta** todas los **"categorias"**; si es que, la solicitud fue exitosa
+* Caso contrario, se obtendra el **"error 500"**; el cual, es error de conexion en el servidor
+* De momento, se obtiene un total de 7 categorias
+* La API envia la **respuesta** al cliente (Frontend)
+
 
 ```json
 [
