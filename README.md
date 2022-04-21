@@ -365,7 +365,7 @@ module.exports = Category;
 <p align="center"><img src="./img/Readme/sidebar-select.png"/></p> 
 
 
-## SideBar
+## Filtrado por Categoria
 <h1 align="center">📌Filtro de productos desde el "SideBar" y desde el "Select-option" del Navbar</h1>
 <p align="center"><img src="./img/Readme/sidebar.gif"/></p>
 
@@ -535,7 +535,7 @@ Product.findByCat = (cat, result) => {
 <p align="center"><img src="./img/Readme/snackproductos.png"/></p>
 
 
-## Buscador
+## Filtrado por Nombre
 <h1 align="center">📌Filtro de productos desde el "Buscador" del Navbar</h1>
 <p align="center"><img src="./img/Readme/buscador.gif"/></p> 
 
@@ -545,15 +545,90 @@ Al ingresar un **"nombre"** en el "buscador" o "search bar" del Navbar y dar cli
 
 <h1>GET lista de "productos" filtrado por "nombre" desde el "buscador" o "search bar" del Navbar</h1>
 
-* **GET** /api/products/search/:id retornara los **"productos"** filtrados por **"nombre"** ingresado
-* Por medio de **AXIOS** se envia la solicitud GET a la API por medio de la URL: https://bs20-back.vercel.app/api/products/search/:name
-* En respuesta se obtiene los **"productos"** filtrados por **"nombre"**
+`Nota:` Retornara los **"productos"** filtrados por **"nombre"** ingresado
 
-`Nota:` En la URL https://bs20-back.vercel.app/api/products/search/:name el valor de **":name"** debe ser reemplazado por el **"nombre"** ingresado en el "buscador" o "search bar" del Navbar
+* **GET** /api/products/search/:text
+* Por medio de **AXIOS** se envia la solicitud GET, desde el cliente (Frontend)
+* URL de peticion: https://bs20-back.vercel.app/api/products/search/:text
 
-`Nota:` Por ejemplo, si selecciono **"ener"**, su **"name"** es **"ener"**. Entonces la URL será https://bs20-back.vercel.app/api/products/search/ener
+`Nota:` En la URL https://bs20-back.vercel.app/api/products/search/:text el valor de **":text"** debe ser reemplazado por el **"nombre"** ingresado en el "buscador" o "search bar" del Navbar
+
+`Nota:` Por ejemplo, si selecciono **"ener"**, entonces **":text"** es reemplazado por **"ener"**. Entonces la URL será https://bs20-back.vercel.app/api/products/search/ener
 
 `Nota:` Se obtendran los **"productos"** que contengan la palabra **"ener"** en el campo **"name"** de cada producto
+
+```javascript
+// routes/product.routes.js
+
+  ...
+  // Retrieve a single Product with search bar
+  router.get("/search/:text", products.findSearch);
+
+  app.use('/api/products', router);
+};
+```
+
+* La URL de peticion desde el cliente es: https://bs20-back.vercel.app/api/products/search/:text
+* Esto enruta hacia "findSearch" en controllers/product.controller.js
+* "findSearch" direcciona a "findBySearch"
+
+```javascript
+// controllers/product.controller.js
+
+// Find a single Product by Search bar
+exports.findSearch = (req, res) => {
+  Product.findBySearch(req.params.text, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `No hay coincidencias para: "${req.params.text}".`
+        });
+        /* res.send(data); */
+      } else {
+        res.status(500).send({
+          /* message: "Error retrieving Product with TEXT " + req.params.text */
+          message: "Error de conexion. Intente de nuevo"
+        });
+      }
+    } else res.send(data);
+  });
+};
+```
+
+* La API realiza la consulta de peticion a la Base de Datos
+* Se ordena de modo que el campo "price" sea de forma ASCENDENTE
+* Este pedido se encuentra en models/product.model.js
+
+```javascript
+// models/product.model.js
+
+Product.findBySearch = (text, result) => {
+  sql.query(`SELECT * FROM product WHERE name LIKE '%${text}%' ORDER BY price ASC`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      console.log("found product: ", res);
+      result(null, res);
+      return;
+    }
+
+    // not found Product with the TEXT
+    result({ kind: "not_found" }, null);
+  });
+};
+```
+
+* La API obtiene como respuesta los "productos" filtrados por la "categoria" seleccionada; si es que, la solicitud fue exitosa
+* Caso contrario, se obtendra el "error 500"; el cual, es error de conexion en el servidor
+* La API envia la respuesta al cliente (Frontend)
+
+`Nota:`
+* Si se hubiese ingreso en el "buscador" el nombre "ener" se hubiera buscado en el campo "name" los productos que contengan la palabra "ener"
+* Para este caso particular, la respuesta de la API sería la siguiente:
 
 ```json
 [
