@@ -14,12 +14,11 @@ https://bs20-back.vercel.app/
 
 - [Descripción y contexto](#descripción-y-contexto)
 - [Guía de usuario](#guía-de-usuario)
-- [Vista de escritorio](#vista-de-escritorio)
-  - [Productos](#productos)
-  - [Categorias](#categorias)
-  - [SiderBar](#sidebar)
-  - [Select-option](#select-option)
-  - [Buscador](#buscador)
+- [Peticiones a la API](#peticiones-a-la-api)
+  - [Peticiones de productos](#peticiones-de-productos)
+  - [Peticiones de categorias](#peticiones-de-categorias)
+  - [Peticiones de filtrado por categoria](#peticiones-de-filtrado-por-categoria)
+  - [Peticiones de filtrado por nombre](#peticiones-de-filtrado-por-nombre)
   - [Errores](#errores)
 - [Guía de instalación](#guía-de-instalación)
 - [Información adicional](#información-adicional)
@@ -251,7 +250,7 @@ module.exports = Product;
 <p align="center"><img src="./img/Readme/todosproductos.png"/></p> 
 
 
-## Categorias
+## Peticiones de Categorias
 <h1>GET lista de "categorias"</h1>
 
 `Nota:` Retorna todas las "categorias"
@@ -365,7 +364,7 @@ module.exports = Category;
 <p align="center"><img src="./img/Readme/sidebar-select.png"/></p> 
 
 
-## Filtrado por Categoria
+## Peticiones de Filtrado por Categoria
 <h1 align="center">📌Filtro de productos desde el "SideBar" y desde el "Select-option" del Navbar</h1>
 <p align="center"><img src="./img/Readme/sidebar.gif"/></p>
 
@@ -535,7 +534,7 @@ Product.findByCat = (cat, result) => {
 <p align="center"><img src="./img/Readme/snackproductos.png"/></p>
 
 
-## Filtrado por Nombre
+## Peticiones de Filtrado por Nombre
 <h1 align="center">📌Filtro de productos desde el "Buscador" del Navbar</h1>
 <p align="center"><img src="./img/Readme/buscador.gif"/></p> 
 
