@@ -492,31 +492,10 @@ Product.findByCat = (cat, result) => {
 ]
 ```
 
-*  Finalmente, los **"productos"** filtrados por la **"categoria"** seleccionada, son renderizados en el frontend
 
-
-<p align="center"><img src="./img/Readme/piscoproductos.png"/></p>
-
-
-## Select-option
-<h1 align="center">📌Filtro de productos desde el "Select-option" del Navbar</h1>
-<p align="center"><img src="./img/Readme/select-option.gif"/></p>
-
-Ahora veamos acerca del filtrado de **"productos"** por medio de las **"categorias"** en el "Select-option" del Navbar
-
-Al dar click sobre una de las **"categorias"**, se enviará **01 peticion** a la **API del backend** para solicitar los datos de los **"productos"** filtrados por la **"categoria"** seleccionada
-
-<h1>GET lista de "productos" filtrado por "categorias" desde el "Select-option" del Navbar</h1>
-
-* **GET** /api/products/cat/:id retornara los **"productos"** filtrados por la **"categoria"** seleccionada
-* Por medio de **AXIOS** se envia la solicitud GET a la API por medio de la URL: https://bs20-back.vercel.app/api/products/cat/:id
-* En respuesta se obtiene los **"productos"** filtrados por **"categoria"**
-
-`Nota:` En la URL https://bs20-back.vercel.app/api/products/cat/:id el valor de **":id"** debe ser reemplazado por el **"id"** de la **"categoria"** seleccionada
-
-`Nota:` Por ejemplo, si selecciono **"snack"**, su **"id"** es **"5"**. Entonces la URL será https://bs20-back.vercel.app/api/products/cat/5
-
-`Nota:` Se obtendran los **"productos"** que tengan el campo **"category: 5"**
+`Nota:`
+* Si se hubiese seleccionado "snack" el "id" de la "categoria" seria "5"
+* Para este caso particular, la respuesta de la API sería la siguiente:
 
 ```json
 [
@@ -550,6 +529,8 @@ Al dar click sobre una de las **"categorias"**, se enviará **01 peticion** a la
 
 *  Finalmente, los **"productos"** filtrados por la **"categoria"** seleccionada, son renderizados en el frontend
 
+
+<p align="center"><img src="./img/Readme/piscoproductos.png"/></p>
 
 <p align="center"><img src="./img/Readme/snackproductos.png"/></p>
 
