@@ -671,11 +671,100 @@ Product.findBySearch = (text, result) => {
 
 `1er Error:` Se da cuando el nombre ingresado por medio del "buscador" o "search bar" del Navbar, no coincide con algun nombre de un producto de la Base de datos
 
+* **GET** /api/products/search/:text
+* Por medio de **AXIOS** se envia la solicitud GET, desde el cliente (Frontend)
+* URL de peticion: https://bs20-back.vercel.app/api/products/search/:text
+
+`Nota:` En la URL https://bs20-back.vercel.app/api/products/search/:text el valor de **":text"** debe ser reemplazado por el **"nombre"** ingresado en el "buscador" o "search bar" del Navbar
+
+`Nota:` Por ejemplo, si selecciono **"asdasd"**, entonces **":text"** es reemplazado por **"asdasd"**. Entonces la URL será https://bs20-back.vercel.app/api/products/search/asdasd
+
+`Nota:` Se obtendran los **"productos"** que contengan la palabra **"asdasd"** en el campo **"name"** de cada producto
+
+```javascript
+// routes/product.routes.js
+
+  ...
+  // Retrieve a single Product with search bar
+  router.get("/search/:text", products.findSearch);
+
+  app.use('/api/products', router);
+};
+```
+
+* La URL de peticion desde el cliente es: https://bs20-back.vercel.app/api/products/search/:text
+* Esto enruta hacia "findSearch" en controllers/product.controller.js
+* "findSearch" direcciona a "findBySearch"
+
+```javascript
+// controllers/product.controller.js
+
+// Find a single Product by Search bar
+exports.findSearch = (req, res) => {
+  Product.findBySearch(req.params.text, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `No hay coincidencias para: "${req.params.text}".`
+        });
+        /* res.send(data); */
+      } else {
+        res.status(500).send({
+          /* message: "Error retrieving Product with TEXT " + req.params.text */
+          message: "Error de conexion. Intente de nuevo"
+        });
+      }
+    } else res.send(data);
+  });
+};
+```
+
+* Al continuar con la peticion a "findBySearch" del "models", se sabrá que no existen coincidencias para el nombre "asdasd"
+* Para este caso, el "controllers" devolverá en respuesta el Error 404 con el mensaje "No hay coincidencias para: "asdasd".
+
 `Solucion:` Intentar con ingresar otro nombre
 
 <p align="center"><img src="./img/Readme/error1.png"/></p>
 
 `2do Error:` Se da cuando se interrumpe la conexion de internet o cuando no hay conexion con el servidor
+
+* **GET** /api/products
+* En este caso, para los diferentes tipos de PETICIONES predefinidos en la presente API
+* Por medio de **AXIOS** se envia la solicitud GET, desde el cliente (Frontend)
+* URL de peticion: https://bs20-back.vercel.app/api/products/...
+
+```javascript
+// routes/product.routes.js
+
+  ...
+  ...
+
+  app.use('/api/products', router);
+};
+```
+
+* La URL de peticion desde el cliente es: https://bs20-back.vercel.app/api/products/...
+* Esto enruta hacia "findSearch" en controllers/product.controller.js
+
+```javascript
+// controllers/product.controller.js
+
+    ...
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `No hay coincidencias para: "${req.params.text}".`
+        });
+      } else {
+        res.status(500).send({
+          message: "Error de conexion. Intente de nuevo"
+        });
+      }
+    } else res.send(data);
+    ...
+```
+
+* En caso se pierda la conexion con la Base de Datos, la API responderá con el Error 500 y con el mensaje "Error de conexion. Intente de nuevo"
 
 `Solucion:` Recargar la pagina web o reiniciar la conexion a internet
 
@@ -690,8 +779,10 @@ Product.findBySearch = (text, result) => {
 
 
 * Para el Software de gestion de paquetes del Backend se está usando NPM
-* Para la instalacion:
+* Para la instalacion en LOCAL:
   * Clonar el repositorio
+  * En la terminal ejecutar el comando `npm install`
+  * Para levantar el servidor en local, ejecutar el comando  `nodemon index.js`
 
 
 ### Información adicional
