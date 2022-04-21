@@ -101,7 +101,7 @@ module.exports = app => {
 * Si la ruta de peticion es: `"URL/api/products"`, podrá visualizar todos los `productos`
 * Si la ruta de peticion es: `"URL/api/products/2"`, podrá visualizar el producto con el campo `id` igual a `2`
 * Si la ruta de peticion es: `"URL/api/products/cat/4"` podrá visualizar los productos con el campo `category` igual a `4`
-* Si la ruta de peticion es: `"URL/api/products/search/ener"` podrá visualizar los productos con el campo "name" que contiene en su contenido la palabra `ener`
+* Si la ruta de peticion es: `"URL/api/products/search/ener"` podrá visualizar los productos con el campo `name` que contiene en su contenido la palabra `ener`
 
 
 <h1>GET - "categorias"</h1>
