@@ -40,11 +40,11 @@ Puedes acceder a la API a traves de: <a href="https://bs20-back.vercel.app/" tar
 ## Peticiones a la API
 <h1 align="center">Peticiones a la API</h1>
 
-Al iniciar la plataforma web de 🛍 🛒 **Bsale Test - Frontend** 🛍 🛒; desde el lado del cliente se realizarán **02 peticiones** a la **API del backend** para solicitar los datos de los **"productos"** y los datos de las **"categorias"**
+Al iniciar la plataforma web de 🛍 🛒 **Bsale Test - Frontend** 🛍 🛒; desde el lado del cliente se realizarán `02 peticiones` a la `API del backend` para solicitar los datos de los `productos` y los datos de las `categorias`
 
 La API establece una conexion hacia la Base de Datos suministrada por la empresa
 
-`Nota:` Los **"productos"** estan alojados en la tabla "product" de la base de datos suministrados por la empresa
+`Nota:` Los `productos` estan alojados en la tabla `product` de la base de datos suministrados por la empresa
 
 | `🔭Tabla` | `⚡"product"` |
 | :------ | :------ |
@@ -55,16 +55,16 @@ La API establece una conexion hacia la Base de Datos suministrada por la empresa
 | discount | Porcentaje de descuento del producto (int) |
 | category | Identificador de la categoria (int) |
 
-`Nota:` Las **"categorias"** estan alojadas en la tabla "category" de la base de datos suministrados por la empresa
+`Nota:` Las `categorias` estan alojadas en la tabla `category` de la base de datos suministrados por la empresa
 
 | `🔭Tabla` | `⚡"category"` |
 | :------ | :------ |
 | id | Identificador unicod del producto (int) |
 | name | Nombre del producto (varchar) |
 
-`Nota:` La ruta del **API del backend** es: <a href="https://bs20-back.vercel.app/" target="_blank">https://bs20-back.vercel.app/</a>
+`Nota:` La ruta del `API del backend` es: <a href="https://bs20-back.vercel.app/" target="_blank">https://bs20-back.vercel.app/</a>
 
-`Nota:` Las **peticiones** son de tipo **GET**
+`Nota:` Las `peticiones` son de tipo `GET`
 
 <h1>GET - "productos"</h1>
 
@@ -94,14 +94,14 @@ module.exports = app => {
   app.use('/api/products', router);
 };
 ```
-`Nota:` Esta peticion GET accede a la tabla "product" de la Base de Datos
+`Nota:` Esta peticion GET accede a la tabla `product` de la Base de Datos
 
 `Nota:` URL = https://bs20-back.vercel.app/
 
-* Si la ruta de peticion es: `"URL/api/products"`, podrá visualizar todos los "productos"
-* Si la ruta de peticion es: `"URL/api/products/2"`, podrá visualizar el producto con el campo "id" igual a "2"
-* Si la ruta de peticion es: `"URL/api/products/cat/4"` podrá visualizar los productos con el campo "category" igual a "4"
-* Si la ruta de peticion es: `"URL/api/products/search/ener"` podrá visualizar los productos con el campo "name" que contiene en su contenido la palabra "ener"
+* Si la ruta de peticion es: `"URL/api/products"`, podrá visualizar todos los `productos`
+* Si la ruta de peticion es: `"URL/api/products/2"`, podrá visualizar el producto con el campo `id` igual a `2`
+* Si la ruta de peticion es: `"URL/api/products/cat/4"` podrá visualizar los productos con el campo `category` igual a `4`
+* Si la ruta de peticion es: `"URL/api/products/search/ener"` podrá visualizar los productos con el campo "name" que contiene en su contenido la palabra `ener`
 
 
 <h1>GET - "categorias"</h1>
@@ -127,23 +127,23 @@ module.exports = app => {
 };
 ```
 
-`Nota:` Esta peticion GET accede a la tabla "category" de la Base de Datos
+`Nota:` Esta peticion GET accede a la tabla `category` de la Base de Datos
 
 `Nota:` URL = https://bs20-back.vercel.app/
 
-* Si la ruta de peticion es: `"URL/api/categories"`, podrá visualizar todas las "categorias"
-* Si la ruta de peticion es: `"URL/api/categories/2"`, podrá visualizar la categoria con el campo "id" igual a "2"
+* Si la ruta de peticion es: `"URL/api/categories"`, podrá visualizar todas las `categorias`
+* Si la ruta de peticion es: `"URL/api/categories/2"`, podrá visualizar la categoria con el campo `id` igual a `2`
 
 
 ## Peticiones de Productos
 <h1>GET lista de "productos"</h1>
 
-`Nota:` Retorna todos los "productos"
+`Nota:` Retorna todos los `productos`
 
 * **GET** /api/products desde el cliente (Frontend)
-* Por medio de **AXIOS** se envia la solicitud GET, desde el cliente (Frontend)
+* Por medio de `AXIOS` se envia la solicitud GET, desde el cliente (Frontend)
 * URL de peticion: https://bs20-back.vercel.app/api/products
-* La API recibe la **peticion** tipo **GET** y la procesa
+* La API recibe la `peticion` tipo `GET` y la procesa
 
 ```javascript
 // routes/product.routes.js
@@ -158,8 +158,8 @@ module.exports = app => {
 ```
 
 * La URL de peticion desde el cliente es: https://bs20-back.vercel.app/api/products
-* Esto enruta hacia **"findAll"** en `controllers/product.controller.js`
-* **"findAll"** direcciona a **"getAll"**
+* Esto enruta hacia `findAll` en `controllers/product.controller.js`
+* `findAll` direcciona a `getAll`
 
 ```javascript
 // controllers/product.controller.js
@@ -179,8 +179,8 @@ exports.findAll = (req, res) => {
 };
 ```
 
-* La API realiza la **consulta** de **peticion** a la Base de Datos
-* Se ordena de modo que el campo "price" sea de forma ASCENDENTE
+* La API realiza la `consulta` de `peticion` a la Base de Datos
+* Se ordena de modo que el campo `price` sea de forma ASCENDENTE
 * Este pedido se encuentra en `models/product.model.js`
 
 ```javascript
@@ -209,10 +209,10 @@ Product.getAll = (title, result) => {
 module.exports = Product;
 ```
 
-* La API obtiene como **respuesta** todos los **"productos"**; si es que, la solicitud fue exitosa
-* Caso contrario, se obtendra el **"error 500"**; el cual, es error de conexion en el servidor
+* La API obtiene como `respuesta` todos los `productos` si es que, la solicitud fue exitosa
+* Caso contrario, se obtendra el `error 500` el cual, es error de conexion en el servidor
 * De momento, se obtiene un total de 57 productos
-* La API envia la **respuesta** al cliente (Frontend)
+* La API envia la `respuesta` al cliente (Frontend)
 
 ```json
 [
@@ -244,7 +244,7 @@ module.exports = Product;
 ]
 ```
 
-*  Finalmente, los **"productos"** son renderizados en el frontend
+*  Finalmente, los `productos` son renderizados en el frontend
 
 
 <p align="center"><img src="./img/Readme/todosproductos.png"/></p> 
@@ -253,12 +253,12 @@ module.exports = Product;
 ## Peticiones de Categorias
 <h1>GET lista de "categorias"</h1>
 
-`Nota:` Retorna todas las "categorias"
+`Nota:` Retorna todas las `categorias`
 
 * **GET** /api/categories desde el cliente (Frontend)
-* Por medio de **AXIOS** se envia la solicitud GET, desde el cliente (Frontend)
+* Por medio de `AXIOS` se envia la solicitud GET, desde el cliente (Frontend)
 * URL de peticion: https://bs20-back.vercel.app/api/categories
-* La API recibe la **peticion** tipo **GET** y la procesa
+* La API recibe la `peticion` tipo `GET` y la procesa
 
 
 ```javascript
@@ -274,8 +274,8 @@ module.exports = Product;
 ```
 
 * La URL de peticion desde el cliente es: https://bs20-back.vercel.app/api/categories
-* Esto enruta hacia **"findAll"** en `controllers/category.controller.js`
-* **"findAll"** direcciona a **"getAll"**
+* Esto enruta hacia `findAll` en `controllers/category.controller.js`
+* `findAll` direcciona a `getAll`
 
 ```javascript
 // controllers/category.controller.js
@@ -297,8 +297,8 @@ exports.findAll = (req, res) => {
 ...
 ```
 
-* La API realiza la **consulta** de **peticion** a la Base de Datos
-* Se ordena de modo que el campo "price" sea de forma ASCENDENTE
+* La API realiza la `consulta` de `peticion` a la Base de Datos
+* Se ordena de modo que el campo `price` sea de forma ASCENDENTE
 * Este pedido se encuentra en `models/category.model.js`
 
 ```javascript
@@ -328,10 +328,10 @@ module.exports = Category;
 ```
 
 
-* La API obtiene como **respuesta** todas los **"categorias"**; si es que, la solicitud fue exitosa
-* Caso contrario, se obtendra el **"error 500"**; el cual, es error de conexion en el servidor
+* La API obtiene como `respuesta` todas los `categorias` si es que, la solicitud fue exitosa
+* Caso contrario, se obtendra el `error 500` el cual, es error de conexion en el servidor
 * De momento, se obtiene un total de 7 categorias
-* La API envia la **respuesta** al cliente (Frontend)
+* La API envia la `respuesta` al cliente (Frontend)
 
 
 ```json
@@ -352,39 +352,39 @@ module.exports = Category;
 ]
 ```
 
-*  Finalmente, las **"categorias"** son renderizadas en el "Sidebar" y en el "Select-option" del Navbar
+*  Finalmente, las `categorias` son renderizadas en el `Sidebar` y en el `Select-option` del Navbar
 
 
-`Nota:` Cada **"producto"** tiene un campo de **"category"** con un numero asignado entre 1 y 7.
+`Nota:` Cada `producto` tiene un campo de `category` con un numero asignado entre 1 y 7.
 
-`Nota:` Estos numeros estan relacionados con cada **"categoria"** obtenida.
+`Nota:` Estos numeros estan relacionados con cada `categoria` obtenida.
 
-`Nota:` Esto servirá para realizar el filtrado de los "productos" y ordenarlos por "categorias"
+`Nota:` Esto servirá para realizar el filtrado de los `productos` y ordenarlos por `categorias`
 
 <p align="center"><img src="./img/Readme/sidebar-select.png"/></p> 
 
 
 ## Peticiones de Filtrado por Categoria
-<h1 align="center">📌Filtro de productos desde el "SideBar" y desde el "Select-option" del Navbar</h1>
+<h1 align="center">📌Filtro de productos desde el SideBar y desde el Select-option del Navbar</h1>
 
-Ahora veamos acerca del filtrado de **"productos"** por medio de las **"categorias"**
+Ahora veamos acerca del filtrado de `productos` por medio de las `categorias`
 
-Al dar click sobre una de las **"categorias"**, ya sea del SIDEBAR o del SELECT-OPTION, se enviará **01 peticion** a la **API del backend** para solicitar los datos de los **"productos"** filtrados por la **"categoria"** seleccionada
+Al dar click sobre una de las `categorias` ya sea del `SIDEBAR` o del `SELECT-OPTION`, se enviará `01 peticion` a la `API del backend` para solicitar los datos de los `productos` filtrados por la `categoria` seleccionada
 
 <h1>GET lista de "productos" filtrado por "categorias"</h1>
 
-`Nota:` Retornara los **"productos"** filtrados por la **"categoria"** seleccionada
+`Nota:` Retornara los `productos` filtrados por la `categoria` seleccionada
 
 * **GET** /api/products/cat/:cat
-* Por medio de **AXIOS** se envia la solicitud GET, desde el cliente (Frontend)
+* Por medio de `AXIOS` se envia la solicitud GET, desde el cliente (Frontend)
 * URL de peticion: `https://bs20-back.vercel.app/api/products/cat/:cat`
 * La API recibe la peticion GET y la procesa
 
-`Nota:` En la URL `https://bs20-back.vercel.app/api/products/cat/:cat` el valor de **":cat"** debe ser reemplazado por el **"id"** de la **"categoria"** seleccionada
+`Nota:` En la URL `https://bs20-back.vercel.app/api/products/cat/:cat` el valor de `:cat` debe ser reemplazado por el `id` de la `categoria` seleccionada
 
-`Nota:` Por ejemplo, si selecciono **"pisco"**, su **"id"** es **"2"**. Entonces la URL será https://bs20-back.vercel.app/api/products/cat/2
+`Nota:` Por ejemplo, si selecciono `pisco` su `id` es `2` Entonces la URL será https://bs20-back.vercel.app/api/products/cat/2
 
-`Nota:` Se obtendran los **"productos"** que tengan el campo **"category: 2"**
+`Nota:` Se obtendran los `productos` que tengan el campo `category: 2`
 
 ```javascript
 // routes/product.routes.js
@@ -398,8 +398,8 @@ Al dar click sobre una de las **"categorias"**, ya sea del SIDEBAR o del SELECT-
 ```
 
 * La URL de peticion desde el cliente es: `https://bs20-back.vercel.app/api/products/cat/:cat`
-* Esto enruta hacia "findOneCat" en `controllers/product.controller.js`
-* "findOneCat" direcciona a "findByCat"
+* Esto enruta hacia `findOneCat` en `controllers/product.controller.js`
+* `findOneCat` direcciona a `findByCat`
 
 ```javascript
 // controllers/product.controller.js
@@ -425,7 +425,7 @@ exports.findOneCat = (req, res) => {
 ```
 
 * La API realiza la consulta de peticion a la Base de Datos
-* Se ordena de modo que el campo "price" sea de forma ASCENDENTE
+* Se ordena de modo que el campo `price` sea de forma ASCENDENTE
 * Este pedido se encuentra en `models/product.model.js`
 
 ```javascript
@@ -452,12 +452,12 @@ Product.findByCat = (cat, result) => {
 ...
 ```
 
-* La API obtiene como respuesta los "productos" filtrados por la "categoria" seleccionada; si es que, la solicitud fue exitosa
-* Caso contrario, se obtendra el "error 500"; el cual, es error de conexion en el servidor
+* La API obtiene como respuesta los `productos` filtrados por la `categoria` seleccionada; si es que, la solicitud fue exitosa
+* Caso contrario, se obtendra el `error 500`; el cual, es error de conexion en el servidor
 * La API envia la respuesta al cliente (Frontend)
 
 `Nota:`
-* Si se hubiese seleccionado "pisco" el "id" de la "categoria" seria "2"
+* Si se hubiese seleccionado `pisco` el `id` de la `categoria` seria `2`
 * Para este caso particular, la respuesta de la API sería la siguiente:
 
 ```json
@@ -492,7 +492,7 @@ Product.findByCat = (cat, result) => {
 
 
 `Nota:`
-* Si se hubiese seleccionado "snack" el "id" de la "categoria" seria "5"
+* Si se hubiese seleccionado `snack` el "id" de la `categoria` seria `5`
 * Para este caso particular, la respuesta de la API sería la siguiente:
 
 ```json
@@ -525,7 +525,7 @@ Product.findByCat = (cat, result) => {
 ]
 ```
 
-*  Finalmente, los **"productos"** filtrados por la **"categoria"** seleccionada, son renderizados en el frontend
+*  Finalmente, los `productos` filtrados por la `categoria` seleccionada, son renderizados en el frontend
 
 
 <p align="center"><img src="./img/Readme/piscoproductos.png"/></p>
@@ -536,23 +536,23 @@ Product.findByCat = (cat, result) => {
 ## Peticiones de Filtrado por Nombre
 <h1 align="center">📌Filtro de productos desde el "Buscador" del Navbar</h1>
 
-Ahora veamos acerca del filtrado de **"productos"** por medio de los **"nombres"** de producto desde el "buscador" o "search bar" del Navbar
+Ahora veamos acerca del filtrado de `productos` por medio de los `nombres` de producto desde el `buscador` o `search bar` del Navbar
 
-Al ingresar un **"nombre"** en el "buscador" o "search bar" del Navbar y dar click sobre el boton "search" o presionar "Enter", se enviará **01 peticion** a la **API del backend** para solicitar los datos de los **"productos"** filtrados por el **"nombre"** ingresado
+Al ingresar un `nombre` en el `buscador` o `search bar` del Navbar y dar click sobre el boton `search` o presionar `Enter`, se enviará `01 peticion` a la `API del backend` para solicitar los datos de los `productos` filtrados por el `nombre` ingresado
 
 <h1>GET lista de "productos" filtrado por "nombre" desde el "buscador" o "search bar" del Navbar</h1>
 
-`Nota:` Retornara los **"productos"** filtrados por **"nombre"** ingresado
+`Nota:` Retornara los `productos` filtrados por `nombre` ingresado
 
 * **GET** /api/products/search/:text
-* Por medio de **AXIOS** se envia la solicitud GET, desde el cliente (Frontend)
+* Por medio de `AXIOS` se envia la solicitud GET, desde el cliente (Frontend)
 * URL de peticion: `https://bs20-back.vercel.app/api/products/search/:text`
 
-`Nota:` En la URL `https://bs20-back.vercel.app/api/products/search/:text` el valor de **":text"** debe ser reemplazado por el **"nombre"** ingresado en el "buscador" o "search bar" del Navbar
+`Nota:` En la URL `https://bs20-back.vercel.app/api/products/search/:text` el valor de `:text` debe ser reemplazado por el `nombre` ingresado en el `buscador` o `search bar` del Navbar
 
-`Nota:` Por ejemplo, si selecciono **"ener"**, entonces **":text"** es reemplazado por **"ener"**. Entonces la URL será https://bs20-back.vercel.app/api/products/search/ener
+`Nota:` Por ejemplo, si selecciono `ener` entonces `:text` es reemplazado por `ener`. Entonces la URL será https://bs20-back.vercel.app/api/products/search/ener
 
-`Nota:` Se obtendran los **"productos"** que contengan la palabra **"ener"** en el campo **"name"** de cada producto
+`Nota:` Se obtendran los `productos` que contengan la palabra `ener` en el campo `name` de cada producto
 
 ```javascript
 // routes/product.routes.js
@@ -566,8 +566,8 @@ Al ingresar un **"nombre"** en el "buscador" o "search bar" del Navbar y dar cli
 ```
 
 * La URL de peticion desde el cliente es: `https://bs20-back.vercel.app/api/products/search/:text`
-* Esto enruta hacia "findSearch" en `controllers/product.controller.js`
-* "findSearch" direcciona a "findBySearch"
+* Esto enruta hacia `findSearch` en `controllers/product.controller.js`
+* `findSearch` direcciona a `findBySearch`
 
 ```javascript
 // controllers/product.controller.js
@@ -593,7 +593,7 @@ exports.findSearch = (req, res) => {
 ```
 
 * La API realiza la consulta de peticion a la Base de Datos
-* Se ordena de modo que el campo "price" sea de forma ASCENDENTE
+* Se ordena de modo que el campo `price` sea de forma ASCENDENTE
 * Este pedido se encuentra en `models/product.model.js`
 
 ```javascript
@@ -619,12 +619,12 @@ Product.findBySearch = (text, result) => {
 };
 ```
 
-* La API obtiene como respuesta los "productos" filtrados por la "categoria" seleccionada; si es que, la solicitud fue exitosa
-* Caso contrario, se obtendra el "error 500"; el cual, es error de conexion en el servidor
+* La API obtiene como respuesta los `productos` filtrados por la `categoria` seleccionada; si es que, la solicitud fue exitosa
+* Caso contrario, se obtendra el `error 500`; el cual, es error de conexion en el servidor
 * La API envia la respuesta al cliente (Frontend)
 
 `Nota:`
-* Si se hubiese ingreso en el "buscador" el nombre "ener" se hubiera buscado en el campo "name" los productos que contengan la palabra "ener"
+* Si se hubiese ingreso en el `buscador` el nombre `ener` se hubiera buscado en el campo `name` los productos que contengan la palabra `ener`
 * Para este caso particular, la respuesta de la API sería la siguiente:
 
 ```json
@@ -657,7 +657,7 @@ Product.findBySearch = (text, result) => {
 ]
 ```
 
-*  Finalmente, los **"productos"** filtrados por el nombre **"ener"** ingresado, son renderizados en el frontend
+*  Finalmente, los `productos` filtrados por el nombre `ener` ingresado, son renderizados en el frontend
 
 
 <p align="center"><img src="./img/Readme/enerproductos.png"/></p>
@@ -666,17 +666,17 @@ Product.findBySearch = (text, result) => {
 ## Errores
 <h1 align="center">📌Errores</h1>
 
-`1er Error:` Se da cuando el nombre ingresado por medio del "buscador" o "search bar" del Navbar, no coincide con algun nombre de un producto de la Base de datos
+`1er Error:` Se da cuando el nombre ingresado por medio del `buscador` o `search bar` del Navbar, no coincide con algun nombre de un producto de la Base de datos
 
 * **GET** /api/products/search/:text
-* Por medio de **AXIOS** se envia la solicitud GET, desde el cliente (Frontend)
+* Por medio de `AXIOS` se envia la solicitud GET, desde el cliente (Frontend)
 * URL de peticion: `https://bs20-back.vercel.app/api/products/search/:text`
 
-`Nota:` En la URL `https://bs20-back.vercel.app/api/products/search/:text` el valor de **":text"** debe ser reemplazado por el **"nombre"** ingresado en el "buscador" o "search bar" del Navbar
+`Nota:` En la URL `https://bs20-back.vercel.app/api/products/search/:text` el valor de `:text` debe ser reemplazado por el `nombre` ingresado en el `buscador` o `search bar` del Navbar
 
-`Nota:` Por ejemplo, si selecciono **"asdasd"**, entonces **":text"** es reemplazado por **"asdasd"**. Entonces la URL será https://bs20-back.vercel.app/api/products/search/asdasd
+`Nota:` Por ejemplo, si selecciono `asdasd`, entonces `:text` es reemplazado por `asdasd`. Entonces la URL será https://bs20-back.vercel.app/api/products/search/asdasd
 
-`Nota:` Se obtendran los **"productos"** que contengan la palabra **"asdasd"** en el campo **"name"** de cada producto
+`Nota:` Se obtendran los `productos` que contengan la palabra `asdasd` en el campo `name` de cada producto
 
 ```javascript
 // routes/product.routes.js
@@ -690,8 +690,8 @@ Product.findBySearch = (text, result) => {
 ```
 
 * La URL de peticion desde el cliente es: `https://bs20-back.vercel.app/api/products/search/:text`
-* Esto enruta hacia "findSearch" en `controllers/product.controller.js`
-* "findSearch" direcciona a "findBySearch"
+* Esto enruta hacia `findSearch` en `controllers/product.controller.js`
+* `findSearch` direcciona a `findBySearch`
 
 ```javascript
 // controllers/product.controller.js
@@ -716,7 +716,7 @@ exports.findSearch = (req, res) => {
 };
 ```
 
-* Al continuar con la peticion a "findBySearch" del "models", se sabrá que no existen coincidencias para el nombre "asdasd"
+* Al continuar con la peticion a `findBySearch` del `models`, se sabrá que no existen coincidencias para el nombre `asdasd`
 * Para este caso, el "controllers" devolverá en respuesta el Error 404 con el mensaje `"No hay coincidencias para: "asdasd".`
 
 `Solucion:` Intentar con ingresar otro nombre
@@ -727,7 +727,7 @@ exports.findSearch = (req, res) => {
 
 * **GET** /api/products
 * En este caso, para los diferentes tipos de PETICIONES predefinidos en la presente API
-* Por medio de **AXIOS** se envia la solicitud GET, desde el cliente (Frontend)
+* Por medio de `AXIOS` se envia la solicitud GET, desde el cliente (Frontend)
 * URL de peticion: `https://bs20-back.vercel.app/api/products/...`
 
 ```javascript
@@ -741,7 +741,7 @@ exports.findSearch = (req, res) => {
 ```
 
 * La URL de peticion desde el cliente es: `https://bs20-back.vercel.app/api/products/...`
-* Esto enruta hacia "findSearch" en `controllers/product.controller.js`
+* Esto enruta hacia `findSearch` en `controllers/product.controller.js`
 
 ```javascript
 // controllers/product.controller.js
@@ -761,7 +761,7 @@ exports.findSearch = (req, res) => {
     ...
 ```
 
-* En caso se pierda la conexion con la Base de Datos, la API responderá con el Error 500 y con el mensaje `"Error de conexion. Intente de nuevo"`
+* En caso se pierda la conexion con la Base de Datos, la API responderá con el `Error 500` y con el mensaje `"Error de conexion. Intente de nuevo"`
 
 `Solucion:` Recargar la pagina web o reiniciar la conexion a internet
 
