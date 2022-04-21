@@ -366,7 +366,6 @@ module.exports = Category;
 
 ## Peticiones de Filtrado por Categoria
 <h1 align="center">📌Filtro de productos desde el "SideBar" y desde el "Select-option" del Navbar</h1>
-<p align="center"><img src="./img/Readme/sidebar.gif"/></p>
 
 Ahora veamos acerca del filtrado de **"productos"** por medio de las **"categorias"**
 
@@ -536,7 +535,6 @@ Product.findByCat = (cat, result) => {
 
 ## Peticiones de Filtrado por Nombre
 <h1 align="center">📌Filtro de productos desde el "Buscador" del Navbar</h1>
-<p align="center"><img src="./img/Readme/buscador.gif"/></p> 
 
 Ahora veamos acerca del filtrado de **"productos"** por medio de los **"nombres"** de producto desde el "buscador" o "search bar" del Navbar
 
