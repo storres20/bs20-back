@@ -98,10 +98,10 @@ module.exports = app => {
 
 `Nota:` URL = https://bs20-back.vercel.app/
 
-* Si la ruta de peticion es: "URL/api/products", podrá visualizar todos los "productos"
-* Si la ruta de peticion es: "URL/api/products/2", podrá visualizar el producto con el campo "id" igual a "2"
-* Si la ruta de peticion es: "URL/api/products/cat/4" podrá visualizar los productos con el campo "category" igual a "4"
-* Si la ruta de peticion es: "URL/api/products/search/ener" podrá visualizar los productos con el campo "name" que contiene en su contenido la palabra "ener"
+* Si la ruta de peticion es: `"URL/api/products"`, podrá visualizar todos los "productos"
+* Si la ruta de peticion es: `"URL/api/products/2"`, podrá visualizar el producto con el campo "id" igual a "2"
+* Si la ruta de peticion es: `"URL/api/products/cat/4"` podrá visualizar los productos con el campo "category" igual a "4"
+* Si la ruta de peticion es: `"URL/api/products/search/ener"` podrá visualizar los productos con el campo "name" que contiene en su contenido la palabra "ener"
 
 
 <h1>GET - "categorias"</h1>
@@ -131,8 +131,8 @@ module.exports = app => {
 
 `Nota:` URL = https://bs20-back.vercel.app/
 
-* Si la ruta de peticion es: "URL/api/categories", podrá visualizar todas las "categorias"
-* Si la ruta de peticion es: "URL/api/categories/2", podrá visualizar la categoria con el campo "id" igual a "2"
+* Si la ruta de peticion es: `"URL/api/categories"`, podrá visualizar todas las "categorias"
+* Si la ruta de peticion es: `"URL/api/categories/2"`, podrá visualizar la categoria con el campo "id" igual a "2"
 
 
 ## Peticiones de Productos
@@ -158,7 +158,7 @@ module.exports = app => {
 ```
 
 * La URL de peticion desde el cliente es: https://bs20-back.vercel.app/api/products
-* Esto enruta hacia **"findAll"** en controllers/product.controller.js
+* Esto enruta hacia **"findAll"** en `controllers/product.controller.js`
 * **"findAll"** direcciona a **"getAll"**
 
 ```javascript
@@ -181,7 +181,7 @@ exports.findAll = (req, res) => {
 
 * La API realiza la **consulta** de **peticion** a la Base de Datos
 * Se ordena de modo que el campo "price" sea de forma ASCENDENTE
-* Este pedido se encuentra en models/product.model.js
+* Este pedido se encuentra en `models/product.model.js`
 
 ```javascript
 // models/product.model.js
@@ -274,7 +274,7 @@ module.exports = Product;
 ```
 
 * La URL de peticion desde el cliente es: https://bs20-back.vercel.app/api/categories
-* Esto enruta hacia **"findAll"** en controllers/category.controller.js
+* Esto enruta hacia **"findAll"** en `controllers/category.controller.js`
 * **"findAll"** direcciona a **"getAll"**
 
 ```javascript
@@ -299,7 +299,7 @@ exports.findAll = (req, res) => {
 
 * La API realiza la **consulta** de **peticion** a la Base de Datos
 * Se ordena de modo que el campo "price" sea de forma ASCENDENTE
-* Este pedido se encuentra en models/category.model.js
+* Este pedido se encuentra en `models/category.model.js`
 
 ```javascript
 // models/category.model.js
@@ -399,7 +399,7 @@ Al dar click sobre una de las **"categorias"**, ya sea del SIDEBAR o del SELECT-
 ```
 
 * La URL de peticion desde el cliente es: https://bs20-back.vercel.app/api/products/cat/:cat
-* Esto enruta hacia "findOneCat" en controllers/product.controller.js
+* Esto enruta hacia "findOneCat" en `controllers/product.controller.js`
 * "findOneCat" direcciona a "findByCat"
 
 ```javascript
@@ -427,7 +427,7 @@ exports.findOneCat = (req, res) => {
 
 * La API realiza la consulta de peticion a la Base de Datos
 * Se ordena de modo que el campo "price" sea de forma ASCENDENTE
-* Este pedido se encuentra en models/product.model.js
+* Este pedido se encuentra en `models/product.model.js`
 
 ```javascript
 // models/product.controller.js
@@ -568,7 +568,7 @@ Al ingresar un **"nombre"** en el "buscador" o "search bar" del Navbar y dar cli
 ```
 
 * La URL de peticion desde el cliente es: https://bs20-back.vercel.app/api/products/search/:text
-* Esto enruta hacia "findSearch" en controllers/product.controller.js
+* Esto enruta hacia "findSearch" en `controllers/product.controller.js`
 * "findSearch" direcciona a "findBySearch"
 
 ```javascript
@@ -596,7 +596,7 @@ exports.findSearch = (req, res) => {
 
 * La API realiza la consulta de peticion a la Base de Datos
 * Se ordena de modo que el campo "price" sea de forma ASCENDENTE
-* Este pedido se encuentra en models/product.model.js
+* Este pedido se encuentra en `models/product.model.js`
 
 ```javascript
 // models/product.model.js
@@ -692,7 +692,7 @@ Product.findBySearch = (text, result) => {
 ```
 
 * La URL de peticion desde el cliente es: https://bs20-back.vercel.app/api/products/search/:text
-* Esto enruta hacia "findSearch" en controllers/product.controller.js
+* Esto enruta hacia "findSearch" en `controllers/product.controller.js`
 * "findSearch" direcciona a "findBySearch"
 
 ```javascript
@@ -719,7 +719,7 @@ exports.findSearch = (req, res) => {
 ```
 
 * Al continuar con la peticion a "findBySearch" del "models", se sabrá que no existen coincidencias para el nombre "asdasd"
-* Para este caso, el "controllers" devolverá en respuesta el Error 404 con el mensaje "No hay coincidencias para: "asdasd".
+* Para este caso, el "controllers" devolverá en respuesta el Error 404 con el mensaje `"No hay coincidencias para: "asdasd".`
 
 `Solucion:` Intentar con ingresar otro nombre
 
@@ -743,7 +743,7 @@ exports.findSearch = (req, res) => {
 ```
 
 * La URL de peticion desde el cliente es: https://bs20-back.vercel.app/api/products/...
-* Esto enruta hacia "findSearch" en controllers/product.controller.js
+* Esto enruta hacia "findSearch" en `controllers/product.controller.js`
 
 ```javascript
 // controllers/product.controller.js
@@ -763,7 +763,7 @@ exports.findSearch = (req, res) => {
     ...
 ```
 
-* En caso se pierda la conexion con la Base de Datos, la API responderá con el Error 500 y con el mensaje "Error de conexion. Intente de nuevo"
+* En caso se pierda la conexion con la Base de Datos, la API responderá con el Error 500 y con el mensaje `"Error de conexion. Intente de nuevo"`
 
 `Solucion:` Recargar la pagina web o reiniciar la conexion a internet
 
