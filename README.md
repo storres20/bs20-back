@@ -366,24 +366,101 @@ module.exports = Category;
 
 
 ## SideBar
-<h1 align="center">📌Filtro de productos desde el "SideBar"</h1>
+<h1 align="center">📌Filtro de productos desde el "SideBar" y desde el "Select-option" del Navbar</h1>
 <p align="center"><img src="./img/Readme/sidebar.gif"/></p>
 
-Ahora veamos acerca del filtrado de **"productos"** por medio de las **"categorias"** en el "Sidebar"
+Ahora veamos acerca del filtrado de **"productos"** por medio de las **"categorias"**
 
-Al dar click sobre una de las **"categorias"**, se enviará **01 peticion** a la **API del backend** para solicitar los datos de los **"productos"** filtrados por la **"categoria"** seleccionada
+Al dar click sobre una de las **"categorias"**, ya sea del SIDEBAR o del SELECT-OPTION, se enviará **01 peticion** a la **API del backend** para solicitar los datos de los **"productos"** filtrados por la **"categoria"** seleccionada
 
-<h1>GET lista de "productos" filtrado por "categorias" desde el "Sidebar"</h1>
+<h1>GET lista de "productos" filtrado por "categorias"</h1>
 
-* **GET** /api/products/cat/:id retornara los **"productos"** filtrados por la **"categoria"** seleccionada
-* Por medio de **AXIOS** se envia la solicitud GET a la API por medio de la URL: https://bs20-back.vercel.app/api/products/cat/:id
-* En respuesta se obtiene los **"productos"** filtrados por **"categoria"**
+`Nota:` Retornara los **"productos"** filtrados por la **"categoria"** seleccionada
 
-`Nota:` En la URL https://bs20-back.vercel.app/api/products/cat/:id el valor de **":id"** debe ser reemplazado por el **"id"** de la **"categoria"** seleccionada
+* **GET** /api/products/cat/:cat
+* Por medio de **AXIOS** se envia la solicitud GET, desde el cliente (Frontend)
+* URL de peticion: https://bs20-back.vercel.app/api/products/cat/:cat
+* La API recibe la peticion GET y la procesa
+
+`Nota:` En la URL https://bs20-back.vercel.app/api/products/cat/:cat el valor de **":cat"** debe ser reemplazado por el **"id"** de la **"categoria"** seleccionada
 
 `Nota:` Por ejemplo, si selecciono **"pisco"**, su **"id"** es **"2"**. Entonces la URL será https://bs20-back.vercel.app/api/products/cat/2
 
 `Nota:` Se obtendran los **"productos"** que tengan el campo **"category: 2"**
+
+```javascript
+// routes/product.routes.js
+
+  ...
+  // Retrieve a single Product with category
+  router.get("/cat/:cat", products.findOneCat);
+  ...
+  app.use('/api/products', router);
+};
+```
+
+* La URL de peticion desde el cliente es: https://bs20-back.vercel.app/api/products/cat/:cat
+* Esto enruta hacia "findOneCat" en controllers/product.controller.js
+* "findOneCat" direcciona a "findByCat"
+
+```javascript
+// controllers/product.controller.js
+...
+// Find a single Product by Category
+exports.findOneCat = (req, res) => {
+  Product.findByCat(req.params.cat, (err, data) => {
+    if (err) {
+      if (err.kind === "not_found") {
+        res.status(404).send({
+          message: `No hay coincidencias para: "${req.params.cat}".`
+        });
+      } else {
+        res.status(500).send({
+          /* message: "Error retrieving Product with CAT " + req.params.cat */
+          message: "Error de conexion. Intente de nuevo"
+        });
+      }
+    } else res.send(data);
+  });
+};
+...
+```
+
+* La API realiza la consulta de peticion a la Base de Datos
+* Se ordena de modo que el campo "price" sea de forma ASCENDENTE
+* Este pedido se encuentra en models/product.model.js
+
+```javascript
+// models/product.controller.js
+...
+Product.findByCat = (cat, result) => {
+  sql.query(`SELECT * FROM product WHERE category = ${cat} ORDER BY price ASC`, (err, res) => {
+    if (err) {
+      console.log("error: ", err);
+      result(err, null);
+      return;
+    }
+
+    if (res.length) {
+      console.log("found product: ", res);
+      result(null, res);
+      return;
+    }
+
+    // not found Product with the id
+    result({ kind: "not_found" }, null);
+  });
+};
+...
+```
+
+* La API obtiene como respuesta los "productos" filtrados por la "categoria" seleccionada; si es que, la solicitud fue exitosa
+* Caso contrario, se obtendra el "error 500"; el cual, es error de conexion en el servidor
+* La API envia la respuesta al cliente (Frontend)
+
+`Nota:`
+* Si se hubiese seleccionado "pisco" el "id" de la "categoria" seria "2"
+* Para este caso particular, la respuesta de la API sería la siguiente:
 
 ```json
 [
